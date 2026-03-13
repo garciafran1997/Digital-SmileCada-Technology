@@ -43,7 +43,7 @@ function App() {
   return (
     <div className="App">
       <span id="home" style={{ position: 'absolute', top: 0 }}></span>
-      <Navbar onCtaClick={() => setIsContactModalOpen(true)} />
+      <Navbar onCtaClick={() => setCurrentView('products')} />
       <Hero onProductsClick={() => setCurrentView('products')} />
 
       <div className="section-reveal" style={{ opacity: 0 }}>

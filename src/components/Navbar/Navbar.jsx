@@ -15,7 +15,7 @@ const Navbar = ({ onCtaClick }) => {
           <li><a href="#lab">DIGITAL SMILECAD TECHNOLOGY</a></li>
           <li><a href="#novedades">NOVEDADES</a></li>
         </ul>
-        <button className="navbar-cta" onClick={onCtaClick}>ENVIAR TRABAJO</button>
+        <button className="navbar-cta" onClick={onCtaClick}>SHOP</button>
       </div>
     </nav>
   );
