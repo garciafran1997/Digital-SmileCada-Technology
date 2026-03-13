@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './Products.css';
 
-const productCategories = ['TODOS', 'RESTAURACIÓN', 'PLANIFICACIÓN', 'ORTODONCIA', 'MODELADO'];
+const productCategories = ['TODOS', 'SCANER', 'IMPRESORA 3D', 'ROPA', 'OTROS'];
 
 const products = [
     {
         title: 'Creality RaptorX',
-        category: 'RESTAURACIÓN',
+        category: 'SCANER',
         description: 'El primer escáner híbrido inalámbrico de láser azul y NIR del mundo. Escaneo de alta precisión y máxima libertad.',
         image: '/raptorx.jpg',
         price: '3900.00',
@@ -14,7 +14,7 @@ const products = [
     },
     {
         title: 'IMPRESORA 3D',
-        category: 'IMPRESIÓN 3D',
+        category: 'IMPRESORA 3D',
         description: 'Soluciones de impresión 3D industrial con la BCN3D Omega I60. Máxima precisión y volumen para tu flujo digital.',
         image: '/omega_i60.jpg',
         price: '6000.00',
@@ -22,7 +22,7 @@ const products = [
     },
     {
         title: 'Ortodoncia Invisible',
-        category: 'ORTODONCIA',
+        category: 'ROPA',
         description: 'Diseño de alineadores y planificación de movimientos dentales para tratamientos de ortodoncia de vanguardia.',
         image: '/library_bg.png',
         price: '90.00',
@@ -30,7 +30,7 @@ const products = [
     },
     {
         title: 'Modelos de Estudio',
-        category: 'MODELADO',
+        category: 'OTROS',
         description: 'Impresión 3D de modelos de alta resolución para diagnóstico y presentación de casos a pacientes.',
         image: '/news_bg.png',
         price: '15.00',

@@ -33,7 +33,7 @@ const LabModal = ({ isOpen, onClose }) => {
                 <button className="modal-close" onClick={onClose}>&times;</button>
                 
                 <div className="modal-header centered">
-                    <span className="modal-subtitle">SMILECAD LAB SERVICES</span>
+                    <span className="modal-subtitle">DIGITAL SMILECAD TECHNOLOGY SERVICES</span>
                     <h2>NUESTROS SERVICIOS</h2>
                     <p className="header-desc">Soluciones integrales de diseño y fabricación digital para clínicas dentales de alto nivel.</p>
                 </div>

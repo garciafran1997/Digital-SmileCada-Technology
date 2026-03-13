@@ -73,7 +73,7 @@ function App() {
       <div className="section-reveal" style={{ opacity: 0 }}>
         <Section
           id="lab"
-          title="SmileCAD Lab"
+          title="DIGITAL SMILECAD TECHNOLOGY"
           description="Nuestro laboratorio digital de alta precisión. Ofrecemos servicios integrales de diseño y fabricación para clínicas dentales."
           image="/lab_bg.png"
           align="right"
@@ -100,7 +100,7 @@ function App() {
       <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
 
       <footer style={{ padding: '5rem 10%', borderTop: '1px solid hsl(var(--border))', textAlign: 'center', color: 'hsl(var(--muted-foreground))' }}>
-        <p>© 2026 SMILECAD DIGITAL DESIGN. Todos los derechos reservados.</p>
+        <p>© 2026 DIGITAL SMILECAD TECHNOLOGY. Todos los derechos reservados.</p>
       </footer>
     </div>
   );
