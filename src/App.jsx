@@ -43,7 +43,7 @@ function App() {
   return (
     <div className="App">
       <span id="home" style={{ position: 'absolute', top: 0 }}></span>
-      <Navbar onCtaClick={() => setCurrentView('products')} />
+      <Navbar onCtaClick={() => setIsContactModalOpen(true)} />
       <Hero onProductsClick={() => setCurrentView('products')} />
 
       <div className="section-reveal" style={{ opacity: 0 }}>
@@ -74,12 +74,12 @@ function App() {
       <div className="section-reveal" style={{ opacity: 0 }}>
         <Section
           id="lab"
-          title="Lab"
+          title="SMILECAD LAB"
           description="Nuestro laboratorio digital de alta precisión. Ofrecemos servicios integrales de diseño y fabricación para clínicas dentales."
           image="/lab_bg.png"
           align="right"
           ctaText="VER LAB"
-          onCtaClick={() => window.open('https://smilecad-lab.vercel.app/', '_blank')}
+          onCtaClick={() => setIsLabModalOpen(true)}
         />
       </div>
 
@@ -101,7 +101,7 @@ function App() {
       <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
 
       <footer style={{ padding: '5rem 10%', borderTop: '1px solid hsl(var(--border))', textAlign: 'center', color: 'hsl(var(--muted-foreground))' }}>
-        <p>© 2026 DIGITAL SMILECAD TECHNOLOGY. Todos los derechos reservados.</p>
+        <p>© 2026 SMILECAD LAB. Todos los derechos reservados.</p>
       </footer>
     </div>
   );
