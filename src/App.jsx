@@ -74,7 +74,7 @@ function App() {
       <div className="section-reveal" style={{ opacity: 0 }}>
         <Section
           id="lab"
-          title="DIGITAL SMILECAD TECHNOLOGY"
+          title="Lab"
           description="Nuestro laboratorio digital de alta precisión. Ofrecemos servicios integrales de diseño y fabricación para clínicas dentales."
           image="/lab_bg.png"
           align="right"
