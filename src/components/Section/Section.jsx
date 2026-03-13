@@ -1,7 +1,7 @@
 import React from 'react';
 import './Section.css';
 
-const Section = ({ id, title, description, image, align = 'left', ctaText = 'SABER MÁS', onCtaClick }) => {
+const Section = ({ id, title, description, image, align = 'left', ctaText = 'SABER MÁS', onCtaClick, imageFlex = 1.2 }) => {
     const isVideo = image && (image.endsWith('.mp4') || image.endsWith('.webm') || image.endsWith('.ogg'));
 
     return (
@@ -12,7 +12,7 @@ const Section = ({ id, title, description, image, align = 'left', ctaText = 'SAB
                     <p>{description}</p>
                     <button className="btn-outline" onClick={onCtaClick}>{ctaText}</button>
                 </div>
-                <div className="section-image soft-fade">
+                <div className="section-image soft-fade" style={{ flex: imageFlex }}>
                     {isVideo ? (
                         <video 
                             src={image} 

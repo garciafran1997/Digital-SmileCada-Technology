@@ -55,6 +55,7 @@ function App() {
           align="right"
           ctaText="VER BIBLIOTECA"
           onCtaClick={() => setIsLibModalOpen(true)}
+          imageFlex={0.8}
         />
       </div>
 
