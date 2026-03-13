@@ -32,32 +32,6 @@
     gap: 1.5rem;
 }
 
-.hero-actions button {
-    padding: 1rem 2rem;
-    font-family: var(--font-heading);
-    letter-spacing: 0.1em;
-    transition: all 0.3s ease;
-}
-
-.btn-primary {
-    background-color: hsl(var(--foreground));
-    color: hsl(var(--background));
-}
-
-.btn-primary:hover {
-    opacity: 0.9;
-}
-
-.btn-outline {
-    border: 1px solid hsl(var(--foreground));
-    color: hsl(var(--foreground));
-}
-
-.btn-outline:hover {
-    background-color: hsl(var(--foreground));
-    color: hsl(var(--background));
-}
-
 .hero-bg {
     position: absolute;
     top: 0;
