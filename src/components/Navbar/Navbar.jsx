@@ -1,0 +1,25 @@
+import React from 'react';
+import './Navbar.css';
+
+const Navbar = ({ onCtaClick, onAiClick }) => {
+  return (
+    <nav className="navbar">
+      <div className="navbar-container">
+        <a href="#home" className="navbar-logo">
+          <img src="/logo.png" alt="SmileCAD Digital Design" />
+        </a>
+        <ul className="navbar-links">
+          <li><a href="#software">SOFTWARE</a></li>
+          <li><a href="#biblioteca">BIBLIOTECA</a></li>
+          <li><a href="#academy">ACADEMY</a></li>
+          <li><a href="#lab">LAB</a></li>
+          <li><a href="#novedades">NOVEDADES</a></li>
+          <li><a href="#ai" onClick={(e) => { e.preventDefault(); onAiClick(); }}>AI</a></li>
+        </ul>
+        <button className="navbar-cta" onClick={onCtaClick}>SHOP</button>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
