@@ -41,6 +41,9 @@ const menuItems = [
 const LibraryModal = ({ isOpen, onClose }) => {
     const [view, setView] = useState('menu');
     const [showViewer, setShowViewer] = useState(false);
+    const [instagramUser, setInstagramUser] = useState('');
+    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [formError, setFormError] = useState('');
 
     if (!isOpen) return null;
 
@@ -66,8 +69,17 @@ const LibraryModal = ({ isOpen, onClose }) => {
                                 <div 
                                     key={index} 
                                     className={`lib-card ${item.id === 'emergence-profiles' ? 'lib-card-emergence' : ''} ${item.id === 'dental-libraries' ? 'lib-card-libraries' : ''}`}
-                                    onClick={() => item.id === 'dental-libraries' ? setView('libraries') : window.location.href = item.downloadLink}
+                                    onClick={() => {
+                                        if (item.id === 'dental-libraries') setView('libraries');
+                                        else if (item.id === 'emergence-profiles') setView('download-options');
+                                        else window.location.href = item.downloadLink;
+                                    }}
                                 >
+                                    {item.id === 'dental-libraries' && (
+                                        <div className="lib-video-background">
+                                            <img src="/Video_De_Dos_Imágenes.gif" alt="Librerías Dentales Video" />
+                                        </div>
+                                    )}
                                     {item.icon && <div className="lib-icon">{item.icon}</div>}
                                     <div className="lib-card-content">
                                         <h3>{item.title}</h3>
@@ -99,6 +111,73 @@ const LibraryModal = ({ isOpen, onClose }) => {
                             ))}
                         </div>
                     </>
+                ) : view === 'download-options' ? (
+                    <div className="download-options-view">
+                        <div className="lib-modal-header">
+                            <button className="btn-back-lib" onClick={() => setView('menu')}>← VOLVER A BIBLIOTECA</button>
+                            <h2>OPCIONES DE DESCARGA</h2>
+                        </div>
+                        <div className="download-options-grid">
+                            <div className="download-option-card free-tier">
+                                <div className="card-header-free">
+                                    <h3>STL GRATUITO</h3>
+                                </div>
+                                <div className="option-instructions">
+                                    <p>Para descargar el STL gratuito, sigue estos tres simples pasos:</p>
+                                    <ol>
+                                        <li>Síguenos en Instagram a <a href="https://instagram.com/labsmilecad" target="_blank" rel="noreferrer">@labsmilecad</a>, <a href="https://instagram.com/academysmilecad" target="_blank" rel="noreferrer">@academysmilecad</a> y <a href="https://instagram.com/digitalsmilecad" target="_blank" rel="noreferrer">@digitalsmilecad</a>.</li>
+                                        <li>Sube una historia mencionando a las tres cuentas con esta imagen obligatoria:</li>
+                                    </ol>
+                                    <div className="promo-image-container">
+                                        <img src="/emergencia.jpeg" alt="Imagen para subir a historia" className="promo-image" />
+                                        <a href="/emergencia.jpeg" download="emergencia.jpeg" className="btn-download-image">DESCARGAR IMAGEN</a>
+                                    </div>
+                                    <p>3. Deja tu cuenta de Instagram a continuación para verificar tu historia.</p>
+                                    {!formSubmitted ? (
+                                        <form className="email-verification-form" onSubmit={(e) => {
+                                            e.preventDefault();
+                                            if(instagramUser.trim() === '') {
+                                                setFormError('Introduce tu usuario');
+                                                return;
+                                            }
+                                            setFormError('');
+                                            setFormSubmitted(true);
+                                        }}>
+                                            <input 
+                                                type="text" 
+                                                placeholder="@tu_usuario_instagram" 
+                                                value={instagramUser}
+                                                onChange={(e) => setInstagramUser(e.target.value)}
+                                                required
+                                            />
+                                            {formError && <span className="error-text">{formError}</span>}
+                                            <button type="submit" className="btn-submit-email">VERIFICAR Y RECIBIR</button>
+                                        </form>
+                                    ) : (
+                                        <div className="success-message">
+                                            ✅ ¡Gracias! Nuestro equipo verificará tu historia y te enviaremos el STL por MD a <strong>{instagramUser}</strong> en breve.
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                            
+                            <div className="download-option-card paid-tier">
+                                <div className="card-header-paid">
+                                    <h3>PAGO DIRECTO</h3>
+                                </div>
+                                <div className="option-instructions">
+                                    <p>Descarga directa e inmediata del <strong>"Perfil de Emergencia - SmileCad"</strong> sin esperas.</p>
+                                    <div className="payment-action">
+                                        <div className="price-tag">5,00 €</div>
+                                        <a href="/models/perfil_emergencia.stl" download="Perfil de Emergencia - SmileCad.stl" className="btn-pay-download">
+                                            COMPRAR
+                                        </a>
+                                        <span className="payment-note">Acceso instantáneo al archivo STL completo.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 ) : (
                     <div className="libraries-detail">
                         <div className="lib-modal-header">

@@ -152,20 +152,29 @@
     background: #000;
 }
 
-.lib-card-libraries::before {
-    content: '';
+.lib-video-background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('/librerias.png') center/cover no-repeat;
-    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-    opacity: 0.8;
+    overflow: hidden;
+    z-index: 0;
 }
 
-.lib-card-libraries:hover::before {
-    transform: scale(1.05);
+.lib-video-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Scale crops out the edges, specifically hiding the veed.io watermark */
+    transform: scale(1.2); 
+    opacity: 0.8;
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.8s ease;
+    pointer-events: none;
+}
+
+.lib-card-libraries:hover .lib-video-background img {
+    transform: scale(1.25);
     opacity: 0.6;
 }
 
@@ -400,8 +409,310 @@
     border-color: white;
 }
 
+/* =========================================
+   Download Options View (Premium Aesthetic)
+   ========================================= */
+
+.download-options-view {
+    animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 1rem;
+}
+
+.download-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.download-option-card {
+    position: relative;
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.paid-tier {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.03);
+}
+
+.download-option-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 100%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+}
+
+.paid-tier::before {
+    background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 100%);
+}
+
+.download-option-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-header-free, .card-header-paid {
+    padding: 1.2rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+.card-header-free {
+    background: radial-gradient(circle at top, rgba(40,40,40,0.8) 0%, rgba(10,10,10,0.8) 100%);
+}
+
+.card-header-paid {
+    background: radial-gradient(circle at top, rgba(50,50,50,0.8) 0%, rgba(10,10,10,0.8) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.download-option-card h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.free-tier h3 {
+    background: linear-gradient(to right, #ffffff, #aaaaaa);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.paid-tier h3 {
+    background: linear-gradient(to right, #ffffff, #cccccc);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.option-instructions {
+    padding: 1.2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+
+.option-instructions p {
+    color: #b0b0b0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
+    font-weight: 300;
+}
+
+.option-instructions ol {
+    color: #999;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+    padding-left: 1.2rem;
+    font-weight: 300;
+}
+
+.option-instructions a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(255,255,255,0.4);
+    transition: all 0.3s ease;
+}
+
+.option-instructions a:hover {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    text-shadow: 0 0 8px rgba(255,255,255,0.5);
+}
+
+.promo-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    background: rgba(0,0,0,0.4);
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.03);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.promo-image {
+    max-width: 100%;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: transform 0.4s ease;
+}
+
+.promo-image:hover {
+    transform: scale(1.03);
+}
+
+.btn-download-image {
+    font-family: var(--font-heading);
+    font-size: 0.65rem;
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.btn-download-image:hover {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
+.email-verification-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: auto;
+}
+
+.email-verification-form input {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 0.8rem 1rem;
+    color: white;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.email-verification-form input:focus {
+    outline: none;
+    border-color: rgba(255,255,255,0.6);
+    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.8);
+}
+
+.error-text {
+    color: #ff4e50;
+    font-size: 0.75rem;
+    margin-top: -0.4rem;
+    font-weight: 500;
+}
+
+.btn-submit-email {
+    font-family: var(--font-heading);
+    background: white;
+    color: black;
+    border: none;
+    padding: 0.8rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.btn-submit-email:hover {
+    background: transparent;
+    color: white;
+    box-shadow: inset 0 0 0 1px white;
+}
+
+.success-message {
+    background: rgba(46, 204, 113, 0.05);
+    border: 1px solid rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+    padding: 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    margin-top: auto;
+    text-align: center;
+    line-height: 1.6;
+    animation: fadeIn 0.5s ease;
+}
+
+.success-message strong {
+    color: white;
+}
+
+.payment-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
+    padding: 1.5rem 0;
+}
+
+.price-tag {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    background: linear-gradient(180deg, #ffffff 30%, #a0a0a0 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 5px 15px rgba(255,255,255,0.15));
+}
+
+.option-instructions .btn-pay-download {
+    font-family: var(--font-heading);
+    background: white;
+    color: black;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.option-instructions .btn-pay-download:hover {
+    background: transparent;
+    color: white;
+    box-shadow: inset 0 0 0 1px white;
+    text-shadow: none;
+    border-bottom: none;
+}
+
+.payment-note {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    letter-spacing: 0.05em;
+}
+
 @media (max-width: 768px) {
     .lib-modal-content {
         padding: 2.5rem;
+    }
+    .download-options-grid {
+        grid-template-columns: 1fr;
     }
 }
