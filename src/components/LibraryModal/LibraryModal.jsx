@@ -58,6 +58,7 @@ const LibraryModal = ({ isOpen, onClose }) => {
             <div className="lib-modal-content" onClick={e => e.stopPropagation()}>
                 <button className="lib-modal-close" onClick={handleClose}>&times;</button>
 
+                {console.log('Current Library View:', view)}
                 {view === 'menu' ? (
                     <>
                         <div className="lib-modal-header">
@@ -83,7 +84,10 @@ const LibraryModal = ({ isOpen, onClose }) => {
                                         {item.id === 'emergence-profiles' && (
                                             <button 
                                                 className="btn-lib-viewer"
-                                                onClick={() => setShowViewer(!showViewer)}
+                                                onClick={() => {
+                                                    console.log('Toggling 3D Viewer');
+                                                    setShowViewer(!showViewer);
+                                                }}
                                             >
                                                 {showViewer ? 'CERRAR VISOR' : 'VISOR 3D'}
                                             </button>
@@ -98,9 +102,17 @@ const LibraryModal = ({ isOpen, onClose }) => {
                                         <button 
                                             className="btn-lib-action"
                                             onClick={() => {
-                                                if (item.id === 'dental-libraries') setView('libraries');
-                                                else if (item.id === 'emergence-profiles') setView('download-options');
-                                                else window.location.href = item.downloadLink;
+                                                console.log('Button clicked for:', item.id);
+                                                if (item.id === 'dental-libraries') {
+                                                    console.log('Setting view to: libraries');
+                                                    setView('libraries');
+                                                } else if (item.id === 'emergence-profiles') {
+                                                    console.log('Setting view to: download-options');
+                                                    setView('download-options');
+                                                } else {
+                                                    console.log('Redirecting to:', item.downloadLink);
+                                                    window.location.href = item.downloadLink;
+                                                }
                                             }}
                                         >
                                             {item.id === 'dental-libraries' ? 'VER LIBRERÍAS' : 'DESCARGAR AHORA'}
