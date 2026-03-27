@@ -69,11 +69,6 @@ const LibraryModal = ({ isOpen, onClose }) => {
                                 <div 
                                     key={index} 
                                     className={`lib-card ${item.id === 'emergence-profiles' ? 'lib-card-emergence' : ''} ${item.id === 'dental-libraries' ? 'lib-card-libraries' : ''}`}
-                                    onClick={() => {
-                                        if (item.id === 'dental-libraries') setView('libraries');
-                                        else if (item.id === 'emergence-profiles') setView('download-options');
-                                        else window.location.href = item.downloadLink;
-                                    }}
                                 >
                                     {item.id === 'dental-libraries' && (
                                         <div className="lib-video-background">
@@ -88,22 +83,26 @@ const LibraryModal = ({ isOpen, onClose }) => {
                                         {item.id === 'emergence-profiles' && (
                                             <button 
                                                 className="btn-lib-viewer"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    setShowViewer(!showViewer);
-                                                }}
+                                                onClick={() => setShowViewer(!showViewer)}
                                             >
                                                 {showViewer ? 'CERRAR VISOR' : 'VISOR 3D'}
                                             </button>
                                         )}
 
                                         {showViewer && item.id === 'emergence-profiles' && (
-                                            <div className="inline-viewer" onClick={e => e.stopPropagation()}>
+                                            <div className="inline-viewer">
                                                 <StlViewer url="/models/1smile.stl" />
                                             </div>
                                         )}
 
-                                        <button className="btn-lib-action">
+                                        <button 
+                                            className="btn-lib-action"
+                                            onClick={() => {
+                                                if (item.id === 'dental-libraries') setView('libraries');
+                                                else if (item.id === 'emergence-profiles') setView('download-options');
+                                                else window.location.href = item.downloadLink;
+                                            }}
+                                        >
                                             {item.id === 'dental-libraries' ? 'VER LIBRERÍAS' : 'DESCARGAR AHORA'}
                                         </button>
                                     </div>
