@@ -264,7 +264,7 @@ const AiPage = ({ onBack }) => {
       <main className="ai-content">
         <div className={`brand-container ${messages.length > 0 ? 'minimized' : ''}`}>
           <video 
-            src="/got.mp4" 
+            src="/IA.mp4" 
             autoPlay 
             loop 
             muted 

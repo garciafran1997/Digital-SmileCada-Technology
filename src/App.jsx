@@ -61,7 +61,7 @@ function App() {
           id="biblioteca"
           title="Biblioteca"
           description="Explora nuestra extensa biblioteca de diseños dentales 3D. Modelos precisos y listos para ser utilizados en tus proyectos."
-          image="/imp.mp4"
+          image="/BIBLIOTECA.mp4"
           align="right"
           ctaText="VER BIBLIOTECA"
           onCtaClick={() => setIsLibModalOpen(true)}
@@ -98,7 +98,7 @@ function App() {
           id="novedades"
           title="Novedades"
           description="Mantente al día con las últimas noticias y avances tecnológicos en el mundo de la odontología digital."
-          image="/PLANET.mp4"
+          image="/NOVEDADES.mp4"
           align="left"
           ctaText="LEER MÁS"
           onCtaClick={() => setIsNewsModalOpen(true)}

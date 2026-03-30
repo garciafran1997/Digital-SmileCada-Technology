@@ -4,7 +4,7 @@ import SoftwareModal from '../SoftwareModal/SoftwareModal';
 
 const Hero = ({ onProductsClick }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const videoSrc = "/soft.mp4?v=4"; // Matches lowercase soft.mp4 on disk
+    const videoSrc = "/INOVACION.mp4"; // Matches INOVACION.mp4 on disk
     const isVideo = videoSrc.split('?')[0].endsWith('.mp4') || videoSrc.split('?')[0].endsWith('.webm');
 
     return (
