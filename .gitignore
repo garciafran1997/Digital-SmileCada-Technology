@@ -3,6 +3,5 @@ dist
 .vercel
 *.stl
 *.zip
-*.mp4
 *.MOV
 .env*.local
