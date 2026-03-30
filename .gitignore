@@ -2,6 +2,7 @@ node_modules
 dist
 .vercel
 *.stl
+!public/models/1smile.stl
 *.zip
 *.MOV
 .env*.local
