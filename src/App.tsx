@@ -30,11 +30,11 @@ function Navbar({ isLoggedIn, onAuthClick }: { isLoggedIn: boolean, onAuthClick:
   }, []);
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/90 backdrop-blur-md py-4' : 'bg-transparent py-6'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled || isOpen ? 'bg-black/95 backdrop-blur-md py-3 md:py-4' : 'bg-transparent py-4 md:py-6'}`}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <img src="/logo.png" alt="Smilecad Logo" className="h-24 md:h-32 object-contain" />
+            <img src="/logo.png" alt="Smilecad Logo" className="h-16 md:h-32 object-contain" />
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
@@ -116,7 +116,7 @@ function FullScreenSection({ id, title, subtitle, image, video, containVideo = f
   }, [video]);
 
   return (
-    <section id={id} className="relative h-screen flex items-end pb-24 lg:pb-32 overflow-hidden">
+    <section id={id} className="relative min-h-screen md:h-screen flex items-end pt-24 pb-16 md:pt-0 md:pb-24 lg:pb-32 overflow-hidden">
       <div className="absolute inset-0 z-0 bg-black">
         {video ? (
           <video
@@ -150,7 +150,7 @@ function FullScreenSection({ id, title, subtitle, image, video, containVideo = f
           transition={{ duration: 0.8, ease: "easeOut" }}
           className={`max-w-3xl ${align === 'right' ? 'ml-auto text-right' : ''} ${align === 'center' ? 'mx-auto text-center' : ''}`}
         >
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold uppercase tracking-wide text-white mb-4 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold uppercase tracking-wide text-white mb-4 leading-tight">
             {title}
           </h2>
           <p className="text-base md:text-xl text-gray-300 mb-8 font-light max-w-2xl">
@@ -170,7 +170,7 @@ function FullScreenSection({ id, title, subtitle, image, video, containVideo = f
 
 function MapSection() {
   return (
-    <section className="bg-black py-24 border-t border-white/5">
+    <section className="bg-black py-16 md:py-24 border-t border-white/5">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row gap-12 items-center">
           <div className="w-full md:w-1/2 h-[400px] rounded-lg overflow-hidden border border-white/10 group">
@@ -414,6 +414,8 @@ export default function App() {
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSendWorkModalOpen, setIsSendWorkModalOpen] = useState(false);
+  const [isSendWorkOptionsOpen, setIsSendWorkOptionsOpen] = useState(false);
+  const [copiedText, setCopiedText] = useState<'medit' | 'shining' | null>(null);
 
   const [teethConfig, setTeethConfig] = useState<Record<number, ToothConfig>>({});
   const [activeTooth, setActiveTooth] = useState<number | null>(null);
@@ -507,9 +509,147 @@ Solicitud de catálogo desde la web:
       <Navbar
         isLoggedIn={isLoggedIn}
         onAuthClick={() => {
-          window.open('https://smilecadlab.base44.app', '_blank');
+          setIsSendWorkOptionsOpen(true);
         }}
       />
+
+      {/* Send Work Options Modal */}
+      {isSendWorkOptionsOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-[#111] border border-white/10 p-5 sm:p-8 max-w-xl w-full relative my-auto max-h-[90vh] overflow-y-auto"
+          >
+            <button
+              onClick={() => setIsSendWorkOptionsOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+            >
+              <X size={24} />
+            </button>
+
+            <h3 className="text-2xl font-display font-bold uppercase tracking-wide text-white mb-2 text-center">
+              Enviar Trabajo
+            </h3>
+            <p className="text-gray-400 text-xs text-center uppercase tracking-widest mb-8">
+              Selecciona tu método de envío preferido
+            </p>
+
+            <div className="space-y-8">
+              {/* Option 1: Portal SmileCad Lab */}
+              <div className="border border-white/10 p-6 rounded-lg bg-white/5 hover:border-white/20 transition-all duration-300">
+                <h4 className="text-xs font-bold uppercase tracking-[0.15em] text-gray-400 mb-2">
+                  Enviar trabajo por:
+                </h4>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="text-lg font-bold text-white uppercase tracking-wider font-display">
+                    SmileCad Lab
+                  </div>
+                  <button
+                    onClick={() => {
+                      window.open('https://smilecadlab.base44.app', '_blank');
+                    }}
+                    className="bg-white text-black font-bold uppercase tracking-[0.15em] text-xs py-3 px-6 hover:bg-gray-200 transition-colors inline-flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <span>Entrar al Portal</span>
+                    <span className="text-[10px]">▶</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Separator / o también enviar por */}
+              <div className="relative flex items-center justify-center py-2">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-white/10"></div>
+                </div>
+                <span className="relative px-4 bg-[#111] text-xs uppercase tracking-[0.2em] text-gray-500 font-bold">
+                  O también enviar por:
+                </span>
+              </div>
+
+              {/* Option 2: Escáneres intraorales */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Medit */}
+                <div className="border border-white/10 p-6 rounded-lg bg-white/5 flex flex-col items-center text-center hover:border-white/20 transition-all duration-300">
+                  {/* Medit Logo */}
+                  <div className="h-24 flex flex-col items-center justify-center gap-2 mb-4 w-full">
+                    <img src="/medit-logo.jpg" alt="Medit Icon" className="h-12 w-12 object-contain rounded-md" />
+                    <img src="/medit-text.png" alt="Medit Text" className="h-5 object-contain" />
+                  </div>
+                  
+                  <span className="text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-1">ID / Usuario:</span>
+                  <div className="bg-black/50 border border-white/5 rounded px-3 py-1.5 font-mono text-xs text-white break-all mb-4 w-full select-all">
+                    smilecadlab@gmail.com
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText('smilecadlab@gmail.com');
+                      setCopiedText('medit');
+                      setTimeout(() => setCopiedText(null), 2000);
+                    }}
+                    className="w-full border border-white/10 hover:border-white/30 text-white font-bold uppercase tracking-[0.1em] text-[10px] py-2 px-4 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    {copiedText === 'medit' ? (
+                      <span className="text-green-400">✓ ¡Copiado!</span>
+                    ) : (
+                      <span>Copiar ID</span>
+                    )}
+                  </button>
+                </div>
+
+                {/* Shining 3D */}
+                <div className="border border-white/10 p-6 rounded-lg bg-white/5 flex flex-col items-center text-center hover:border-white/20 transition-all duration-300">
+                  {/* Shining 3D Logo */}
+                  <div className="h-24 flex flex-col items-center justify-center gap-2 mb-4 w-full">
+                    <img src="/shining-logo.png" alt="Shining 3D Icon" className="h-14 w-14 object-contain" />
+                    <img src="/shining-text.png" alt="Shining 3D Text" className="h-5 object-contain" />
+                  </div>
+
+                  <span className="text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-1">ID / Usuario:</span>
+                  <div className="bg-black/50 border border-white/5 rounded px-3 py-1.5 font-mono text-xs text-white break-all mb-4 w-full select-all">
+                    smilecadlab@gmail.com
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText('smilecadlab@gmail.com');
+                      setCopiedText('shining');
+                      setTimeout(() => setCopiedText(null), 2000);
+                    }}
+                    className="w-full border border-white/10 hover:border-white/30 text-white font-bold uppercase tracking-[0.1em] text-[10px] py-2 px-4 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    {copiedText === 'shining' ? (
+                      <span className="text-green-400">✓ ¡Copiado!</span>
+                    ) : (
+                      <span>Copiar ID</span>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom info link */}
+            <div className="mt-8 text-center border-t border-white/5 pt-6">
+              <p className="text-gray-500 text-xs font-light">
+                ¿Necesitas ayuda para conectar tu escáner?
+                <br />
+                <a
+                  href="https://wa.me/34607703199"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-gray-300 font-bold uppercase tracking-wider text-[10px] inline-flex items-center gap-1.5 mt-2 transition-colors"
+                >
+                  <MessageCircle size={12} className="text-[#25D366]" />
+                  Contactar por WhatsApp
+                </a>
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      )}
 
       {/* Auth Modal */}
       {isAuthModalOpen && (
@@ -517,7 +657,7 @@ Solicitud de catálogo desde la web:
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-[#111] border border-white/10 p-8 max-w-md w-full relative my-8"
+            className="bg-[#111] border border-white/10 p-5 sm:p-8 max-w-md w-full relative my-auto max-h-[90vh] overflow-y-auto"
           >
             <button
               onClick={() => setIsAuthModalOpen(false)}
@@ -602,7 +742,7 @@ Solicitud de catálogo desde la web:
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-[#111] border border-white/10 p-8 max-w-2xl w-full relative my-8 max-h-[90vh] overflow-y-auto"
+            className="bg-[#111] border border-white/10 p-5 sm:p-8 max-w-2xl w-full relative my-auto max-h-[90vh] overflow-y-auto"
           >
             <button
               onClick={() => setIsSendWorkModalOpen(false)}
@@ -791,11 +931,11 @@ Solicitud de catálogo desde la web:
 
       {/* Catalog Modal */}
       {isCatalogModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-[#111] border border-white/10 p-8 max-w-md w-full relative"
+            className="bg-[#111] border border-white/10 p-5 sm:p-8 max-w-md w-full relative my-auto max-h-[90vh] overflow-y-auto"
           >
             <button
               onClick={() => setIsCatalogModalOpen(false)}
@@ -878,11 +1018,11 @@ Solicitud de catálogo desde la web:
 
       {/* Contact Modal */}
       {isContactModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-[#111] border border-white/10 p-8 max-w-md w-full relative"
+            className="bg-[#111] border border-white/10 p-5 sm:p-8 max-w-md w-full relative my-auto max-h-[90vh] overflow-y-auto"
           >
             <button
               onClick={() => {
@@ -1193,7 +1333,7 @@ Solicitud de catálogo desde la web:
           video="/unete-revolucion.mp4"
           buttonText="Enviar Trabajo"
           onButtonClick={() => {
-            window.open('https://smilecadlab.base44.app', '_blank');
+            setIsSendWorkOptionsOpen(true);
           }}
         />
         <FullScreenSection
