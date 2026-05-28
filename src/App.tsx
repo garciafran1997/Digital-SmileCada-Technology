@@ -547,7 +547,7 @@ Solicitud de catálogo desde la web:
                   </div>
                   <button
                     onClick={() => {
-                      window.open('https://smilecadlab.base44.app', '_blank');
+                      window.open('https://smilecad-lab-transfercad.vercel.app/', '_blank');
                     }}
                     className="bg-white text-black font-bold uppercase tracking-[0.15em] text-xs py-3 px-6 hover:bg-gray-200 transition-colors inline-flex items-center justify-center gap-2 cursor-pointer"
                   >
