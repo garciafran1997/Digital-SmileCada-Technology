@@ -637,7 +637,7 @@ Solicitud de catálogo desde la web:
                 ¿Necesitas ayuda para conectar tu escáner?
                 <br />
                 <a
-                  href="https://wa.me/34607703199"
+                  href="https://wa.me/34633801055"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white hover:text-gray-300 font-bold uppercase tracking-wider text-[10px] inline-flex items-center gap-1.5 mt-2 transition-colors"
@@ -1048,14 +1048,14 @@ Solicitud de catálogo desde la web:
                     <span>Enviar Correo</span>
                   </button>
                   <a
-                    href="tel:+34607703199"
+                    href="tel:+34633801055"
                     className="flex items-center justify-center space-x-3 bg-white text-black font-bold uppercase tracking-[0.1em] text-xs py-4 hover:bg-gray-200 transition-colors"
                   >
                     <Phone size={18} />
-                    <span>Llamar (607 703 199)</span>
+                    <span>Llamar (633 801 055)</span>
                   </a>
                   <a
-                    href="https://wa.me/34607703199"
+                    href="https://wa.me/34633801055"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center space-x-3 bg-[#25D366] text-white font-bold uppercase tracking-[0.1em] text-xs py-4 hover:bg-[#20b858] transition-colors"
